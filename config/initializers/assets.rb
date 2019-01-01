@@ -14,6 +14,7 @@ Rails.application.config.assets.precompile += %w( ie_lt9.js )
 Rails.application.config.assets.precompile += %w( stat_graphs.js )
 Rails.application.config.assets.precompile += %w( print.css )
 Rails.application.config.assets.precompile += %w( ie.css )
+Rails.application.config.assets.precompile += %w( ckeditor/* ckeditor/lang/* )
 
 # Loads custom images and custom fonts before app/assets/images and app/assets/fonts
 assets_path = Rails.application.config.assets.paths
