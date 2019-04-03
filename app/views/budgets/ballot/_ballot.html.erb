@@ -12,7 +12,17 @@
       <p class="confirmed">
         <%= t("budgets.ballots.show.voted_info_html") %>
       <p>
+<<<<<<< HEAD
       <p><%= t("budgets.ballots.show.voted_info_2") %></p>
+=======
+        <% if @budget.groups.approval_voting.any? %>
+          <%= t("budgets.ballots.show.approval_voted_info_html") %>
+        <% else %>
+          <%= t("budgets.ballots.show.voted_info_html") %>
+        <% end %>
+      </p>
+      <p>Finished voting? <a href="https://docs.google.com/forms/d/e/1FAIpQLScP5ES7Chrh-m6PgU-ToR-_SnKW5jlOcNAbsueGZut_J1vQFw/viewform" target="_blank">Take our quick survey!</a></p>
+>>>>>>> bc25f2617daf86baafc3138aef0da83bf1c611f5
     </div>
   </div>
 </div>
@@ -26,16 +36,19 @@
           <h3>
             <%= group.name %> - <%= @ballot.heading_for_group(group).name %>
           </h3>
-          <%= link_to t("budgets.ballots.show.remaining",
-                      amount: @ballot.formatted_amount_available(@ballot.heading_for_group(group))).html_safe,
+          <%= link_to t("budgets.ballots.show.remaining.#{group.voting_style}_html", amount: remaining_votes(@ballot, group)),
                       budget_group_path(@budget, group) %>
         </div>
         <% if @ballot.has_lines_in_group?(group) %>
           <h4 class="amount-spent text-right">
-            <%= t("budgets.ballots.show.amount_spent") %>
-            <span>
-              <%= @ballot.formatted_amount_spent(@ballot.heading_for_group(group)) %>
-            </span>
+              <% if group.approval_voting? %>
+                <%= t('budgets.ballots.show.votes_cast_html', amount: @ballot.investments.by_group(group.id).count) %>
+              <% else %>
+                <%= t("budgets.ballots.show.amount_spent") %>
+                <span>
+                  <%= @ballot.formatted_amount_spent(@ballot.heading_for_group(group)) %>
+                </span>
+              <%end %>
           </h4>
         <% else %>
           <p>
