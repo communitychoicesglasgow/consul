@@ -13,8 +13,6 @@ namespace :budgets do
 
   end
 
-<<<<<<< HEAD
-=======
   namespace :phases do
     desc "Generates Phases for existing Budgets without them & migrates description_* attributes"
     task generate_missing: :environment do
@@ -40,5 +38,4 @@ namespace :budgets do
     end
   end
 
->>>>>>> bc25f2617daf86baafc3138aef0da83bf1c611f5
 end
